@@ -23,6 +23,11 @@ libexec_path="$(abs_dirname "$0")"
 export _AMZN_ROOT="$(abs_dirname "$libexec_path")"
 export PATH="${libexec_path}:$PATH"
 
+if [ "$1" != "init" ]; then
+  [ -f ~/.amznrc ] && source ~/.amznrc
+  [ -f ./.amznrc ] && source ./.amznrc
+fi
+
 command="$1"
 case "$command" in
 "" | "-h" | "--help" )
