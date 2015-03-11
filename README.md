@@ -1,5 +1,6 @@
-This is a wrapper for ryandotsmith/amzn-base and ryandotsmith/amzn-ship based on
-basecamp/sub.
+This is a wrapper for [amzn-base](https://github.com/ryandotsmith/amzn-base) and
+[amzn-ship](https://github.com/ryandotsmith/amzn-ship) based on
+[sub](https://github.com/basecamp/sub).
 
 It may evolve into something else at some point, but right now the goal is to
 change the ui to be more to my liking, enable auto-completion, etc.
