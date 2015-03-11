@@ -1,0 +1,37 @@
+ensure_amzn_ship_dir() {
+  if [ -z "$AMZN_SHIP_DIR" ]; then
+    echo "amzn: AMZN_SHIP_DIR must be set in your environment" >&2
+    exit 1
+  fi
+}
+
+app_name() {
+  if [ -z "$1" ]; then
+    if [ -z "$AMZN_APP_NAME" ]; then
+      basename $(pwd)
+    else
+      echo "$AMZN_APP_NAME"
+    fi
+  else
+    echo "$1"
+  fi
+}
+
+run_ship_command() {
+  ensure_amzn_ship_dir
+
+  command="$1"
+  environment="$2"
+
+  if [ -z "$environment" ]; then
+    echo "amzn $command: environment is required" >&2
+    exit 1
+  fi
+
+  shift 2
+
+  app=$(app_name $1)
+
+  cd $AMZN_SHIP_DIR
+  bundle exec bin/${command} $app $environment $@
+}
