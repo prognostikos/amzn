@@ -8,6 +8,7 @@
 # NOTE: You must set AMZN_BASE_DIR in your environment to point to your amzn-base directory.
 
 set -e
+[ -n "$AMZN_DEBUG" ] && set -x
 
 if [ -z "$AMZN_BASE_DIR" ]; then
   echo "amzn ami: AMZN_BASE_DIR must be set in your environment" >&2
