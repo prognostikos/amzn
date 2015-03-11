@@ -1,13 +1,32 @@
+# amzn
+
 This is a wrapper for [amzn-base](https://github.com/ryandotsmith/amzn-base) and
-[amzn-ship](https://github.com/ryandotsmith/amzn-ship) based on
+[amzn-ship](https://github.com/ryandotsmith/amzn-ship) using
 [sub](https://github.com/basecamp/sub).
 
 It may evolve into something else at some point, but right now the goal is to
-change the ui to be more to my liking, enable auto-completion, allow them to be
-used from any directory, etc.
+wrap the ui to be more to my liking, enable auto-completion, make it easier to
+use from application directories, etc.
+
+## Installation
+
+Clone this repo, enter the directory, and run `./bin/amzn init`. It will display
+what to add to your shell configuration file.
+
+## Configuration
 
 `amzn` will source `.amznrc` files in ~/ and the current working directory, in
-that order, before running any commands.
+that order, before running any commands. These files can contain any shell
+commands, but are principally used to export the many environment variables used
+by amzn-base and amzn-ship.
+
+Two environment variables are required by `amzn` itself - the locations of
+amzn-base and amzn-ship. e.g.
+
+```
+$ echo "export AMZN_BASE_DIR=~/c/lib/amzn-base" >> ~/.amznrc
+$ echo "export AMZN_SHIP_DIR=~/c/lib/amzn-ship" >> ~/.amznrc
+```
 
 ## amzn-base wrapper
 
@@ -20,9 +39,10 @@ Builds an ami with the given <framework> based on the given <base-ami>
    amzn ami ruby-nginx ami-234ecc54
 
 NOTE: You must set AMZN_BASE_DIR in your environment to point to your amzn-base directory.
-$ echo "export AMZN_BASE_DIR=~/c/lib/amzn-base" >> .amznrc
-$ amzn ami ruby-nginx ami-234ecc54
 ```
+
+(Why `amzn ami` instead of `amzn build-ami`? Because I'm considering adding an
+`amzn build` and am addicted to shell completion.)
 
 ## amzn-ship wrapper
 
@@ -42,8 +62,6 @@ Sets up an ASG, ELB, etc. with amzn-ship
 The last argument, [app], is optional, and defaults to the AMZN_APP_NAME environment variable or the name of the current directory if not given.
 
 NOTE: You must set AMZN_SHIP_DIR in your environment to point to your amzn-ship directory.
-$ echo "export AMZN_SHIP_DIR=~/c/lib/amzn-ship" >> .amznrc
-$ amzn setup staging
 ```
 
 ```
@@ -58,5 +76,4 @@ Destroys the ASG, ELB, etc. with amzn-ship
 The last argument, [app], is optional, and defaults to the AMZN_APP_NAME environment variable or the name of the current directory if not given.
 
 NOTE: You must set AMZN_SHIP_DIR in your environment to point to your amzn-ship directory.
-$ amzn terminate staging
 ```
