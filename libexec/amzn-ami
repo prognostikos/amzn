@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Usage: amzn ami framework base-ami
+# Summary: wrap amzn-base's build-ami command
+# Help: Builds an ami with the given <framework> based on the given <base-ami>
+#
+#    amzn ami ruby-nginx ami-234ecc54
+#
+# NOTE: You must set AMZN_BASE_DIR in your environment to point to your amzn-base directory.
+
+set -e
+
+if [ -z "$AMZN_BASE_DIR" ]; then
+  echo "amzn ami: AMZN_BASE_DIR must be set in your environment" >&2
+  exit 1
+fi
+
+# Provide amzn completions
+if [ "$1" = "--complete" ]; then
+  ls -1 "$AMZN_BASE_DIR/frameworks"
+  exit
+fi
+
+cd $AMZN_BASE_DIR
+./build-ami "frameworks/$1" $2
