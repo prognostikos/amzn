@@ -74,6 +74,40 @@ The arguments are optional:
 ```
 
 ```
+$ amzn help release
+
+Usage: amzn release [-e environment] [-a app] [-s ~/path/to/source]
+
+Tags and uploads code to S3 and moves the S3 latest release pointer.
+
+   amzn release -e staging
+   amzn release -e staging -a killer-app
+   amzn release -e staging -a killer-app -s ~/c/killer-app
+
+The arguments are optional:
+   [-e environment] defaults to '-e staging' if not given
+   [-a app] defaults to the AMZN_APP_NAME environment variable if set or the name of the current directory
+   [-s ~/path/to/source] defaults to the AMZN_APP_DIR environment variable if set or the current directory
+```
+
+```
+$ amzn help deploy
+
+Usage: amzn deploy [-e environment] [-a app] [-r r1]
+
+Run the deploy command on instances belonging to a group.
+
+   amzn deploy -e staging
+   amzn deploy -e staging -a killer-app
+   amzn deploy -e staging -a killer-app -r r1
+
+The arguments are optional:
+   [-e environment] defaults to '-e staging' if not given
+   [-a app] defaults to the AMZN_APP_NAME environment variable if set or the name of the current directory
+   [-r r1] an optional release number
+```
+
+```
 $ amzn help terminate
 
 Usage: amzn terminate [-e environment] [-a app]

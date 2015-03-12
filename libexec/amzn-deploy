@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Usage: amzn deploy [-e environment] [-a app] [-r r1]
+# Summary: wrap amzn-ship's deploy command
+# Help: Run the deploy command on instances belonging to a group.
+#
+#    amzn deploy -e staging
+#    amzn deploy -e staging -a killer-app
+#    amzn deploy -e staging -a killer-app -r r1
+#
+# The arguments are optional:
+#    [-e environment] defaults to '-e staging' if not given
+#    [-a app] defaults to the AMZN_APP_NAME environment variable if set or the name of the current directory
+#    [-r r1] an optional release number
+
+source "$_AMZN_ROOT/libexec/shared"
+
+run_ship_command deploy $@

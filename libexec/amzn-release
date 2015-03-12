@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Usage: amzn release [-e environment] [-a app] [-s ~/path/to/source]
+# Summary: wrap amzn-ship's release command
+# Help: Tags and uploads code to S3 and moves the S3 latest release pointer.
+#
+#    amzn release -e staging
+#    amzn release -e staging -a killer-app
+#    amzn release -e staging -a killer-app -s ~/c/killer-app
+#
+# The arguments are optional:
+#    [-e environment] defaults to '-e staging' if not given
+#    [-a app] defaults to the AMZN_APP_NAME environment variable if set or the name of the current directory
+#    [-s ~/path/to/source] defaults to the AMZN_APP_DIR environment variable if set or the current directory
+
+source "$_AMZN_ROOT/libexec/shared"
+
+run_ship_command release $@
