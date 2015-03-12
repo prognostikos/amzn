@@ -58,44 +58,53 @@ as an argument.
 
 ```
 $ amzn help setup
-Usage: amzn setup environment [app]
+
+Usage: amzn setup [-e environment] [-a app]
 
 Sets up an ASG, ELB, etc. with amzn-ship
 
-   amzn setup staging
-   amzn setup staging killer-app
+   amzn setup
+   amzn setup -e staging
+   amzn setup -e staging -a killer-app
 
-The last argument, [app], is optional, and defaults to the AMZN_APP_NAME environment variable or the name of the current directory if not given.
+The arguments are optional:
 
-NOTE: You must set AMZN_SHIP_DIR in your environment to point to your amzn-ship directory.
+   [-e environment] defaults to '-e staging' if not given
+   [-a app] defaults to the AMZN_APP_NAME environment variable if set or the name of the current directory
 ```
 
 ```
 $ amzn help terminate
-Usage: amzn terminate environment [app]
+
+Usage: amzn terminate [-e environment] [-a app]
 
 Destroys the ASG, ELB, etc. with amzn-ship
 
-   amzn terminate staging
-   amzn terminate staging killer-app
+   amzn terminate
+   amzn terminate -e staging
+   amzn terminate -e staging -a killer-app
 
-The last argument, [app], is optional, and defaults to the AMZN_APP_NAME environment variable or the name of the current directory if not given.
+The arguments are optional:
 
-NOTE: You must set AMZN_SHIP_DIR in your environment to point to your amzn-ship directory.
+   [-e environment] defaults to '-e staging' if not given
+   [-a app] defaults to the AMZN_APP_NAME environment variable if set or the name of the current directory
 ```
 
 ```
 $amzn help update-asg
-Usage: amzn update-asg environment [app]
 
-Update the ASG with a new AMI, etc.
+Usage: amzn update-asg [-e environment] [-a app]
 
-   amzn update-asg staging
-   amzn update-asg staging killer-app
+Recreate the launch configuration for the ASG with the latest config
 
-The last argument, [app], is optional, and defaults to the AMZN_APP_NAME environment variable or the name of the current directory if not given.
+   amzn update-asg
+   amzn update-asg -e staging
+   amzn update-asg -e staging -a killer-app
+
+The arguments are optional:
+
+   [-e environment] defaults to '-e staging' if not given
+   [-a app] defaults to the AMZN_APP_NAME environment variable if set or the name of the current directory
 
 The new ami id must be in the AMI environment variable.
-
-NOTE: You must set AMZN_SHIP_DIR in your environment to point to your amzn-ship directory.
 ```

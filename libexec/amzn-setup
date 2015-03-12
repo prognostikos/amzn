@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
-# Usage: amzn setup environment [app]
+# Usage: amzn setup [-e environment] [-a app]
 # Summary: wrap amzn-ship's setup command
 # Help: Sets up an ASG, ELB, etc. with amzn-ship
 #
-#    amzn setup staging
-#    amzn setup staging killer-app
+#    amzn setup
+#    amzn setup -e staging
+#    amzn setup -e staging -a killer-app
 #
-# The last argument, [app], is optional, and defaults to the AMZN_APP_NAME environment variable or the name of the current directory if not given.
+# The arguments are optional:
 #
-# NOTE: You must set AMZN_SHIP_DIR in your environment to point to your amzn-ship directory.
-
-set -e
-[ -n "$AMZN_DEBUG" ] && set -x
+#    [-e environment] defaults to '-e staging' if not given
+#    [-a app] defaults to the AMZN_APP_NAME environment variable if set or the name of the current directory
 
 source "$_AMZN_ROOT/libexec/shared"
 

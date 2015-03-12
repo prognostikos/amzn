@@ -1,3 +1,6 @@
+set -e
+[ -n "$AMZN_DEBUG" ] && set -x
+
 ensure_amzn_ship_dir() {
   if [ -z "$AMZN_SHIP_DIR" ]; then
     echo "amzn: AMZN_SHIP_DIR must be set in your environment" >&2
@@ -20,18 +23,62 @@ app_name() {
 run_ship_command() {
   ensure_amzn_ship_dir
 
+  while getopts ":a:s:e:r:" opt; do
+    case $opt in
+      a)
+        application=$OPTARG
+        ;;
+      s)
+        source_dir=$OPTARG
+        ;;
+      e)
+        environment=$OPTARG
+        ;;
+      r)
+        release=$OPTARG
+        ;;
+      \?)
+        echo "amzn: invalid option -$OPTARG" >&2
+        exit 1
+        ;;
+      :)
+        echo "amzn: option -$OPTARG requires an argument" >&2
+        exit 1
+        ;;
+    esac
+  done
+
   command="$1"
-  environment="$2"
 
   if [ -z "$environment" ]; then
-    echo "amzn $command: environment is required" >&2
-    exit 1
+    environment=staging
   fi
 
-  shift 2
+  if [ -z "$source_dir" ]; then
+    if [ -z "$AMZN_APP_DIR" ]; then
+      source_dir=$(pwd)
+    else
+      source_dir=$AMZN_APP_DIR
+    fi
+  fi
 
-  app=$(app_name $1)
+  application=$(app_name $application)
 
   cd $AMZN_SHIP_DIR
-  bundle exec bin/${command} $app $environment $@
+
+  case $command in
+    setup|update-asg|terminate)
+      bundle exec bin/${command} $application $environment
+      ;;
+    deploy)
+      bundle exec bin/${command} $application $environment $release
+      ;;
+    release)
+      bundle exec bin/${command} $application $environment $source_dir
+      ;;
+    *)
+      echo "amzn: invalid amzn-ship command $command" >&2
+      exit 1
+      ;;
+  esac
 }
