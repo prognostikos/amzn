@@ -23,6 +23,9 @@ app_name() {
 run_ship_command() {
   ensure_amzn_ship_dir
 
+  command="$1"
+  shift
+
   while getopts ":a:s:e:r:" opt; do
     case $opt in
       a)
@@ -47,8 +50,6 @@ run_ship_command() {
         ;;
     esac
   done
-
-  command="$1"
 
   if [ -z "$environment" ]; then
     environment=staging
