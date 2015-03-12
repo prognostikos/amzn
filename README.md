@@ -83,3 +83,19 @@ The last argument, [app], is optional, and defaults to the AMZN_APP_NAME environ
 
 NOTE: You must set AMZN_SHIP_DIR in your environment to point to your amzn-ship directory.
 ```
+
+```
+$amzn help update-asg
+Usage: amzn update-asg environment [app]
+
+Update the ASG with a new AMI, etc.
+
+   amzn update-asg staging
+   amzn update-asg staging killer-app
+
+The last argument, [app], is optional, and defaults to the AMZN_APP_NAME environment variable or the name of the current directory if not given.
+
+The new ami id must be in the AMI environment variable.
+
+NOTE: You must set AMZN_SHIP_DIR in your environment to point to your amzn-ship directory.
+```
