@@ -20,13 +20,19 @@ that order, before running any commands. These files can contain any shell
 commands, but are principally used to export the many environment variables used
 by amzn-base and amzn-ship.
 
+See the sample [global](sample-global.amznrc) and
+[per-application](sample-application.amznrc) files for ideas.
+
 Two environment variables are required by `amzn` itself - the locations of
 amzn-base and amzn-ship. e.g.
 
 ```
-$ echo "export AMZN_BASE_DIR=~/c/lib/amzn-base" >> ~/.amznrc
-$ echo "export AMZN_SHIP_DIR=~/c/lib/amzn-ship" >> ~/.amznrc
+$ echo "export AMZN_BASE_DIR=~/path/to/amzn-base" >> ~/.amznrc
+$ echo "export AMZN_SHIP_DIR=~/path/to/amzn-ship" >> ~/.amznrc
 ```
+
+Feel free to ignore all of this if you're using something else to manage your
+environment variables.
 
 ## amzn-base wrapper
 

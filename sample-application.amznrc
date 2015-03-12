@@ -1,0 +1,10 @@
+# Sample per-application configuration for amzn, to be stored in ~/your/app/dir/.amznrc
+
+export INSTANCE_TYPE=c3.large
+export MIN_INSTANCES=1
+export MAX_INSTANCES=4
+export VOLUME_SIZE=32
+
+export AMZN_APP_NAME=killer-app
+
+export AMI=your-amzn-base-created-ami
